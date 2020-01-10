@@ -40,7 +40,7 @@ function buildTeam() {
   promptUser()
   .then(function(data) {
     const manager = new Manager(data.name, data.id, data.email, data.officeNumber);
-    console.log(manager);
+    appendFileAsync('./output/team.html', manager);
   }).then(function() {
     appendFileAsync('./output/team.html', 
     `</div>
