@@ -209,27 +209,36 @@ function generateHtml() {
             <h5>Office number: ${managerArray[0].officeNumber}</h5>
           </div>
         </div>`)
-    })
-};
-
-    // .then(function() {
-        // .then(function(engineerArray) {
-        //   for(const i = 0; i<engineerArray.length; i++) {
-        //     fs.appendFile('./output/team.html', 
-        //     `<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-        //       <div class="card-header"><h2>${engineerArray[i].name}</h2></div>
-        //         <div class="card-body">
-        //           <h4 class="card-title">Manager</h4>
-        //           <h5>ID: ${engineerArray[i].id}</h5>
-        //           <h5>Email: ${engineerArray[i].email}</h5>
-        //           <h5>Office number: ${engineerArray[i].github}</h5>
-        //         </div>
-        //       </div>`, function(){
-        //         console.log("Logged engineer" + [i+1]);
-        //       })};
-        //   })
-//       }
-//     );
-// };  
+        .then(function() {
+          for(let i = 0; i<engineerArray.length; i++) {
+            appendFileAsync('./output/team.html', 
+            `<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+              <div class="card-header"><h2>${engineerArray[i].name}</h2></div>
+                <div class="card-body">
+                  <h4 class="card-title">Manager</h4>
+                  <h5>ID: ${engineerArray[i].id}</h5>
+                  <h5>Email: ${engineerArray[i].email}</h5>
+                  <h5>Office number: ${engineerArray[i].github}</h5>
+                </div>
+              </div>`)
+              .then(function() {
+                appendFileAsync('./output/team.html', 
+                `<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+                  <div class="card-header"><h2>${internArray[i].name}</h2></div>
+                    <div class="card-body">
+                      <h4 class="card-title">Manager</h4>
+                      <h5>ID: ${internArray[i].id}</h5>
+                      <h5>Email: ${internArray[i].email}</h5>
+                      <h5>Office number: ${internArray[i].school}</h5>
+                    </div>
+                  </div>`
+                ).then(function() {
+                  console.log("Generated team directory! Check output folder for team.html");
+                });
+              });
+            };
+          });
+        });
+      };
 
 buildTeam();
