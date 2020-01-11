@@ -20,22 +20,22 @@ function buildTeam() {
   return inquirer.prompt([
     {
       type: "question",
-      message: "Let's build your team directory! First, enter the name of your team manager: ",
+      message: "Let's build your team directory! First, enter the name of your team manager:",
       name: "name"
     },
     {
       type: "question",
-      message: "ID: ",
+      message: "ID:",
       name: "id",
     },
     {
       type: "question",
-      message: "Email: ",
+      message: "Email:",
       name: "email",
     },
     {
       type: "question",
-      message: "Office number: ",
+      message: "Office number:",
       name: "officeNumber",
     }
   ])
@@ -60,22 +60,22 @@ function getEngineers() {
   return inquirer.prompt([
     {
       type: "question",
-      message: "Name: ",
+      message: "Name:",
       name: "name"
     },
     {
       type: "question",
-      message: "ID: ",
+      message: "ID:",
       name: "id",
     },
     {
       type: "question",
-      message: "Email: ",
+      message: "Email:",
       name: "email",
     },
     {
       type: "question",
-      message: "GitHub username: ",
+      message: "GitHub username:",
       name: "github",
     }
   ])
@@ -124,22 +124,22 @@ function getInterns() {
   return inquirer.prompt([
     {
       type: "question",
-      message: "Name: ",
+      message: "Name:",
       name: "name"
     },
     {
       type: "question",
-      message: "ID: ",
+      message: "ID:",
       name: "id",
     },
     {
       type: "question",
-      message: "Email: ",
+      message: "Email:",
       name: "email",
     },
     {
       type: "question",
-      message: "School: ",
+      message: "School:",
       name: "school",
     }
   ])
@@ -193,52 +193,61 @@ function generateHtml() {
           <p class="lead">Thanks for checking out our team directory! Take a look at our stellar roster below...</p>
         </div>
       </div>
-  
-      <div class="row">
-        <div class="col">
-          <div class="container">`
-    )
-    .then(function() {
-      appendFileAsync('./output/team.html', 
-      `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-        <div class="card-header"><h2>${managerArray[0].name}</h2></div>
-          <div class="card-body">
-            <h4 class="card-title">Manager</h4>
-            <h5>ID: ${managerArray[0].id}</h5>
-            <h5>Email: ${managerArray[0].email}</h5>
-            <h5>Office number: ${managerArray[0].officeNumber}</h5>
-          </div>
-        </div>`)
-        .then(function() {
-          for(let i = 0; i<engineerArray.length; i++) {
+
+      <div class="container">
+        <div class="row">
+          <div class="col">`
+    );
+
+    appendFileAsync('./output/team.html', 
+    `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+      <div class="card-header"><h2>${managerArray[0].name}</h2></div>
+        <div class="card-body">
+          <h4 class="card-title">Manager</h4>
+          <h5>ID: ${managerArray[0].id}</h5>
+          <h5>Email: ${managerArray[0].email}</h5>
+          <h5>Office number: ${managerArray[0].officeNumber}</h5>
+        </div>
+      </div>`).then(function() {
+        for(let i = 0; i<engineerArray.length; i++) {
+          appendFileAsync('./output/team.html', 
+          `<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+            <div class="card-header"><h2>${engineerArray[i].name}</h2></div>
+              <div class="card-body">
+                <h4 class="card-title">Engineer</h4>
+                <h5>ID: ${engineerArray[i].id}</h5>
+                <h5>Email: ${engineerArray[i].email}</h5>
+                <h5>Office number: ${engineerArray[i].github}</h5>
+              </div>
+            </div>`)
+          }
+        }).then(function() {
+          for(let i = 0; i<internArray.length; i++) {
             appendFileAsync('./output/team.html', 
-            `<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-              <div class="card-header"><h2>${engineerArray[i].name}</h2></div>
+            `<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+              <div class="card-header"><h2>${internArray[i].name}</h2></div>
                 <div class="card-body">
-                  <h4 class="card-title">Manager</h4>
-                  <h5>ID: ${engineerArray[i].id}</h5>
-                  <h5>Email: ${engineerArray[i].email}</h5>
-                  <h5>Office number: ${engineerArray[i].github}</h5>
+                  <h4 class="card-title">Intern</h4>
+                  <h5>ID: ${internArray[i].id}</h5>
+                  <h5>Email: ${internArray[i].email}</h5>
+                  <h5>Office number: ${internArray[i].school}</h5>
                 </div>
               </div>`)
-              .then(function() {
-                appendFileAsync('./output/team.html', 
-                `<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-                  <div class="card-header"><h2>${internArray[i].name}</h2></div>
-                    <div class="card-body">
-                      <h4 class="card-title">Manager</h4>
-                      <h5>ID: ${internArray[i].id}</h5>
-                      <h5>Email: ${internArray[i].email}</h5>
-                      <h5>Office number: ${internArray[i].school}</h5>
-                    </div>
-                  </div>`
-                ).then(function() {
-                  console.log("Generated team directory! Check output folder for team.html");
-                });
-              });
-            };
-          });
-        });
-      };
+            }
+          }).then(function() {
+            appendFileAsync('./output/team.html', 
+            `</div>
+              </div>
+              </div>
+              <!-- Optional JavaScript -->
+              <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+              <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+              <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+              <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+              </body>
+              </html>`
+            );
+          });    
+};
 
 buildTeam();
