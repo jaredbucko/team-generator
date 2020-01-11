@@ -172,6 +172,40 @@ function getInterns() {
 
 function generateHtml() {
 
+  const engineerLoop = function() {
+    for(let i = 0; i<engineerArray.length; i++) {
+      appendFileAsync('./output/team.html', 
+      `<div class="col-lg-3">
+      <div class="card text-white bg-info mb-3" style="max-width: 18rem;">
+        <div class="card-header"><h2>${engineerArray[i].name}</h2></div>
+        <div class="card-body">
+          <h4 class="card-title">Engineer</h4>
+          <h5>ID: ${engineerArray[i].id}</h5>
+          <h5>Email: ${engineerArray[i].email}</h5>
+          <h5>GitHub: ${engineerArray[i].github}</h5>
+        </div>
+      </div>
+    </div>`);
+      };
+    };
+
+  const internLoop = function() {
+    for(let i = 0; i<internArray.length; i++) {
+      appendFileAsync('./output/team.html', 
+      `<div class="col-lg-3">
+      <div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
+        <div class="card-header"><h2>${internArray[i].name}</h2></div>
+        <div class="card-body">
+          <h4 class="card-title">Intern</h4>
+          <h5>ID: ${internArray[i].id}</h5>
+          <h5>Email: ${internArray[i].email}</h5>
+          <h5>School: ${internArray[i].school}</h5>
+        </div>
+      </div>
+    </div>`);
+      };
+    };
+
   writeFileAsync('./output/team.html', 
   `<!doctype html>
   <html lang="en">
@@ -193,48 +227,31 @@ function generateHtml() {
           <p class="lead">Thanks for checking out our team directory! Take a look at our stellar roster below...</p>
         </div>
       </div>
-
+  
       <div class="container">
-        <div class="row">
-          <div class="col">`
-    );
-
-    appendFileAsync('./output/team.html', 
-    `<div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-      <div class="card-header"><h2>${managerArray[0].name}</h2></div>
-        <div class="card-body">
-          <h4 class="card-title">Manager</h4>
-          <h5>ID: ${managerArray[0].id}</h5>
-          <h5>Email: ${managerArray[0].email}</h5>
-          <h5>Office number: ${managerArray[0].officeNumber}</h5>
+        <div class="row justify-content-center">`
+    )
+    .then(function() {
+      appendFileAsync('./output/team.html', 
+        `<div class="col-lg-3">
+        <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
+          <div class="card-header"><h2>${managerArray[0].name}</h2></div>
+          <div class="card-body">
+            <h4 class="card-title">Manager</h4>
+            <h5>ID: ${managerArray[0].id}</h5>
+            <h5>Email: ${managerArray[0].email}</h5>
+            <h5>Office Number: ${managerArray[0].officeNumber}</h5>
+          </div>
         </div>
-      </div>`).then(function() {
-        for(let i = 0; i<engineerArray.length; i++) {
-          appendFileAsync('./output/team.html', 
-          `<div class="card text-white bg-warning mb-3" style="max-width: 18rem;">
-            <div class="card-header"><h2>${engineerArray[i].name}</h2></div>
-              <div class="card-body">
-                <h4 class="card-title">Engineer</h4>
-                <h5>ID: ${engineerArray[i].id}</h5>
-                <h5>Email: ${engineerArray[i].email}</h5>
-                <h5>Office number: ${engineerArray[i].github}</h5>
-              </div>
-            </div>`)
+        </div>`
+      )
+      .then(function() {
+        engineerLoop();
           }
-        }).then(function() {
-          for(let i = 0; i<internArray.length; i++) {
-            appendFileAsync('./output/team.html', 
-            `<div class="card text-white bg-info mb-3" style="max-width: 18rem;">
-              <div class="card-header"><h2>${internArray[i].name}</h2></div>
-                <div class="card-body">
-                  <h4 class="card-title">Intern</h4>
-                  <h5>ID: ${internArray[i].id}</h5>
-                  <h5>Email: ${internArray[i].email}</h5>
-                  <h5>Office number: ${internArray[i].school}</h5>
-                </div>
-              </div>`)
+        ).then(function() {
+            internLoop();
             }
-          }).then(function() {
+          ).then(function() {
             appendFileAsync('./output/team.html', 
             `</div>
               </div>
@@ -247,7 +264,8 @@ function generateHtml() {
               </body>
               </html>`
             );
-          });    
+          }); 
+    });    
 };
 
 buildTeam();
