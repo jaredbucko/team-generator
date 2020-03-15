@@ -13,11 +13,11 @@
   "author": "Jared Bucko",
   "license": "ISC",
   "dependencies": {
-    "inquirer": "^6.3.1",
-    "jest-cli": "^24.9.0"
+    "jest-cli": "^24.9.0",
+    "inquirer": "7.1.0"
   },
   "devDependencies": {
-    "inquirer": "7.0.3",
-    "jest": "^24.9.0"
+    "jest": "^24.9.0",
+    "inquirer": "7.1.0"
   }
 }
